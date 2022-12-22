@@ -33,7 +33,10 @@ prepare:
 	-mkdir -p ~/.config
 # --- HOME folder -------------------------------------------------------------
 wallpaper: prepare
+	cp dotfiles/.config/mimeapps.list ~/.config/
 	cp -r dotfiles/.config/images/ ~/.config/
+	cp -r dotfiles/.config/kitty ~/.config/
+	
 i3-config: wallpaper
 	cp -r dotfiles/.config/i3/ ~/.config/
 	cp -r dotfiles/.config/rofi/ ~/.config/
