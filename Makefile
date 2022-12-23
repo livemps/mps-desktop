@@ -5,20 +5,26 @@ all: desktop-full
 	gui-tools desktop-min desktop-full
 # --- Makefile config (APT) ---------------------------------------------------
 APT_GUI_ESSENTIALS  := galculator gedit gedit-plugins numlockx arandr
-APT_GUI_TERMINAL    := gnome-terminal
+APT_GUI_TERMINAL    := gnome-terminal kitty
 APT_GUI_ICONS       := lxde-icon-theme gnome-extra-icons
 APT_GUI_WEB_CLIENTS := firefox-esr thunderbird
 APT_GUI_TXT_CLIENTS := evince gedit gedit-plugins
 APT_GUI_MM_CLIENTS  := vlc
 APT_DSK_X           := xorg xserver-xorg-video-nouveau xserver-xorg-video-vesa
+APT_DSK_OPENGL      := mesa-utils libglu1-mesa-dev freeglut3-dev \
+			mesa-common-dev libglew-dev libglfw3-dev \
+			libglm-dev libao-dev libmpg123-dev
+APT_DSK_BUMBLEBEE   := psutils gnome-system-monitor xcwd \
+			iw pulseaudio aptitude \
+			python3-tk progress python3-dbus
 APT_DSK_THUNAR      := thunar thunar-data thunar-archive-plugin \
-						thunar-media-tags-plugin thunar-volman \
-						xfce4-goodies xfce4-places-plugin \
-						thunar-gtkhash thunar-vcs-plugin file-roller
+			thunar-media-tags-plugin thunar-volman \
+			xfce4-goodies xfce4-places-plugin \
+			thunar-gtkhash thunar-vcs-plugin file-roller
 APT_DSK_I3          := lightdm i3 compton rofi arc-theme
 APT_DSK_X           := xbacklight
-APT_DSK_GNOME_TOOLS := gnome-system-monitor python3-netifaces gitsome 
-APT_PYTHON          := python3-pygit2 python3-netifaces 
+APT_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome 
+APT_PYTHON          := python3-netifaces python3-pygit2 pip    
 # --- Help --------------------------------------------------------------------
 help:
 	@echo "Usage: make TARGET"
@@ -44,10 +50,15 @@ i3-config: wallpaper
 	cp -r dotfiles/.config/compton.conf ~/.config/
 # --- APT Installers ----------------------------------------------------------
 i3-desktop: i3-config
-	sudo apt install $(APT_DSK_I3) $(APT_DSK_X) $(APT_DSK_GNOME_TOOLS) $(APT_PYTHON)
+	sudo apt install $(APT_DSK_I3) $(APT_DSK_X) $(APT_DSK_GNOME_TOOLS) \
+		$(APT_GUI_TERMINAL) $(APT_PYTHON) $(APT_DSK_BUMBLEBEE)
+	pip install bumblebee-status
+	sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 gui-tools:
-	sudo apt install $(APT_GUI_ESSENTIALS) $(APT_GUI_TERMINAL) $(APT_GUI_ICONS) \
-		$(APT_GUI_WEB_CLIENTS) $(APT_GUI_TXT_CLIENTS) $(APT_GUI_MM_CLIENTS) $(APT_DSK_THUNAR) -y
+	sudo apt install $(APT_GUI_ESSENTIALS) $(APT_GUI_ICONS) \
+		$(APT_GUI_WEB_CLIENTS) $(APT_GUI_TXT_CLIENTS) \
+		$(APT_GUI_MM_CLIENTS) $(APT_DSK_THUNAR) -y
+	sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
 # --- Meta-Targets ------------------------------------------------------------
 desktop-min: i3-desktop
 desktop-full: desktop-min gui-tools
