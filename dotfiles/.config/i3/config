@@ -46,18 +46,6 @@ workspace $ws10 output $Mon2
 # Default Layouts
 for_window [workspace=$ws2] layout stacked
 for_window [workspace=$ws7] layout stacked
-# Bind window classes to workspaces
-assign [class="Firefox-esr"] $ws3
-assign [class="Eclipse"] $ws2
-assign [class="Gedit"] $ws2
-assign [class="Thunar"] $ws2
-assign [class="VirtualBox Manager"] $ws5
-assign [class="thunderbird-default"] $ws7
-assign [class="Mumble"] $ws7
-assign [class="zoom"] $ws7
-assign [class="Microsoft Teams - Preview"] $ws7
-assign [class="Pavucontrol"] $ws9
-assign [class="Spotify"] $ws10
 #### DEFAULT KEYBINDS ##########################################################
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -214,14 +202,27 @@ bar {
         output $Mon1
         position bottom
 	    status_command ~/.local/bin/bumblebee-status \
-            -m disk:root \
-            -m git apt weather arandr layout datetime \
-            -p root.open="thunar" -p root.path="/" -p root.format="/: ({percent:05.02f}%)" \
+            -m disk:root disk:home \
+            -m apt arandr layout datetime \
+            -p home.open="i3-msg workspace $ws2 ; exec thunar" -p home.path="/home/$USER" -p home.format="~: ({percent:05.02f}%)" \
+            -p root.open="i3-msg workspace $ws2 ; exec thunar" -p root.path="/" -p root.format="/: ({percent:05.02f}%)" \
             -t iceberg
         colors {
             background $col-bg-inactive
         }
 }
+# Bind window classes to workspaces
+assign [class="Firefox-esr"] $ws3
+assign [class="Eclipse"] $ws2
+assign [class="Gedit"] $ws2
+assign [class="Thunar"] $ws2
+assign [class="VirtualBox Manager"] $ws5
+assign [class="thunderbird-default"] $ws7
+assign [class="Mumble"] $ws7
+assign [class="zoom"] $ws7
+assign [class="Microsoft Teams - Preview"] $ws7
+assign [class="Pavucontrol"] $ws9
+assign [class="Spotify"] $ws10
 #### AUTOSTART #################################################################
 # X Server settings
 exec --no-startup-id compton -b -f -D 7
@@ -235,24 +236,24 @@ exec i3-msg split h
 exec i3-msg workspace $ws1
 # Custom Containers
 exec --no-startup-id sleep 0.1 && i3-msg workspace $ws1 ; x-terminal-emulator
-exec --no-startup-id sleep 0.4 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "htop && bash -i"
-exec --no-startup-id sleep 0.4 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "~/snippets/he && bash -i"
-exec --no-startup-id sleep 0.8 && i3-msg split v
-exec --no-startup-id sleep 1.2 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "~/snippets/ho && bash -i"
-exec --no-startup-id sleep 1.5 && i3-msg split h
-exec --no-startup-id sleep 1.8 && i3-msg workspace $ws8 ; x-terminal-emulator
-exec --no-startup-id sleep 2.1 && i3-msg workspace $ws8 ; x-terminal-emulator
+# exec --no-startup-id sleep 0.4 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "htop && bash -i"
+# exec --no-startup-id sleep 0.4 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "~/snippets/he && bash -i"
+# exec --no-startup-id sleep 0.8 && i3-msg split v
+# exec --no-startup-id sleep 1.2 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "~/snippets/ho && bash -i"
+# exec --no-startup-id sleep 1.5 && i3-msg split h
+# exec --no-startup-id sleep 1.8 && i3-msg workspace $ws8 ; x-terminal-emulator
+# exec --no-startup-id sleep 2.1 && i3-msg workspace $ws8 ; x-terminal-emulator
 exec --no-startup-id sleep 2.5 && i3-msg workspace $ws10 ; spotify
 # Start Other Containers (Class Asigned)
-exec --no-startup-id sleep 3.0 && gedit  
-exec --no-startup-id sleep 3.0 && virtualbox
-exec --no-startup-id sleep 3.0 && zoom
-exec --no-startup-id sleep 3.0 && teams
-exec --no-startup-id sleep 3.0 && thunderbird
-exec --no-startup-id sleep 3.0 && mumble
+# exec --no-startup-id sleep 3.0 && gedit  
+# exec --no-startup-id sleep 3.0 && virtualbox
+# exec --no-startup-id sleep 3.0 && zoom
+# exec --no-startup-id sleep 3.0 && teams
+# exec --no-startup-id sleep 3.0 && thunderbird
+# exec --no-startup-id sleep 3.0 && mumble
 exec --no-startup-id sleep 3.0 && pavucontrol
-exec --no-startup-id sleep 4.0 && i3-msg split h ; workspace $ws3
-exec --no-startup-id sleep 4.5 && i3-msg workspace $ws3 ; firefox-esr
+#exec --no-startup-id sleep 4.0 && i3-msg split h ; workspace $ws3
+exec --no-startup-id sleep 4.5 && firefox-esr
 # Other utils 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
