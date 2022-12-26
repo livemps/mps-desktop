@@ -22,10 +22,11 @@ APT_DSK_THUNAR      := thunar thunar-data thunar-archive-plugin \
 						xfce4-goodies xfce4-places-plugin \
 						thunar-gtkhash thunar-vcs-plugin file-roller
 APT_DSK_I3          := lightdm i3 compton rofi feh arc-theme \
-						lxappearance pnmixer
+						lxappearance pnmixer pavucontrol
 APT_DSK_FONTS		:= fonts-font-awesome fonts-fork-awesome
 APT_DSK_X           := xbacklight
-APT_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome 
+APT_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome \
+						network-manager-gnome 
 APT_PYTHON          := python3-netifaces python3-pygit2 python3-psutil pip    
 # --- Help --------------------------------------------------------------------
 help:

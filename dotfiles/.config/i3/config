@@ -30,7 +30,7 @@ client.unfocused        $col-bg-inactive $col-bg-inactive $col-txt-inactive #ff0
 client.focused_inactive $col-bg-inactive $col-bg-inactive $col-txt-inactive #ff0000
 client.urgent           $col-bg-urgent   $col-bg-urgent   $col-txt-active   #ff0000
 #### FONTS #####################################################################
-font pango:JetBrainsMono Nerd Font 9
+font pango:JetBrainsMono Nerd Font 8
 #### WORKSPACES ################################################################
 # Workspace to Monitors
 workspace $ws1 output $Mon1
@@ -153,7 +153,7 @@ bindsym Mod1+F3 exec i3-msg workspace $ws2 && thunar
 bindsym Mod1+F4 exec i3-msg workspace $ws9 && pavucontrol
 
 # Command runner
-bindsym $mod+d exec rofi -modi drun -show drun -show-icons -font "JetBrainsMono Nerd Font 14"
+bindsym $mod+d exec "rofi -modi window,run,drun,ssh -show drun -show-icons -font 'JetBrainsMono Nerd Font 14'"
 
 # Power menu
 bindsym Control+$mod+Mod1+Delete exec ~/snippets/powermenu.bash
@@ -225,8 +225,8 @@ assign [class="Pavucontrol"] $ws9
 assign [class="Spotify"] $ws10
 #### AUTOSTART #################################################################
 # X Server settings
-exec --no-startup-id compton -b -f -D 7
-exec --no-startup-id setxkbap de
+exec --no-startup-id compton -b -f -D 5
+exec --no-startup-id setxkbmap de
 exec --no-startup-id xrdb ~.Xressources
 exec --no-startup-id xset r rate 350 50
 exec --no-startup-id xset s off
@@ -235,26 +235,8 @@ exec --no-startup-id xset -dpms
 exec i3-msg split h
 exec i3-msg workspace $ws1
 # Custom Containers
-exec --no-startup-id sleep 0.1 && i3-msg workspace $ws1 ; x-terminal-emulator
-# exec --no-startup-id sleep 0.4 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "htop && bash -i"
-# exec --no-startup-id sleep 0.4 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "~/snippets/he && bash -i"
-# exec --no-startup-id sleep 0.8 && i3-msg split v
-# exec --no-startup-id sleep 1.2 && i3-msg workspace $ws4 ; x-terminal-emulator -e sh -c "~/snippets/ho && bash -i"
-# exec --no-startup-id sleep 1.5 && i3-msg split h
-# exec --no-startup-id sleep 1.8 && i3-msg workspace $ws8 ; x-terminal-emulator
-# exec --no-startup-id sleep 2.1 && i3-msg workspace $ws8 ; x-terminal-emulator
-exec --no-startup-id sleep 2.5 && i3-msg workspace $ws10 ; spotify
-# Start Other Containers (Class Asigned)
-# exec --no-startup-id sleep 3.0 && gedit  
-# exec --no-startup-id sleep 3.0 && virtualbox
-# exec --no-startup-id sleep 3.0 && zoom
-# exec --no-startup-id sleep 3.0 && teams
-# exec --no-startup-id sleep 3.0 && thunderbird
-# exec --no-startup-id sleep 3.0 && mumble
-exec --no-startup-id sleep 3.0 && pavucontrol
-#exec --no-startup-id sleep 4.0 && i3-msg split h ; workspace $ws3
-exec --no-startup-id sleep 4.5 && firefox-esr
-# Other utils 
+exec --no-startup-id x-terminal-emulator
+exec --no-startup-id firefox-esr
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id pnmixer
