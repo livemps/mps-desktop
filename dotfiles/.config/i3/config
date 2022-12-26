@@ -4,24 +4,22 @@
 #### CONF VARIABLES ############################################################
 set $mod Mod4
 set $term=xterm-kitty
-set $Mon1 DP-2
-set $Mon2 HDMI-0
-#set $Mon1 Virtual1
-#set $Mon2 Virtual1
+set $Mon1 Virtual1
+set $Mon2 Virtual1
 # Workspace names
 set $ws1   "1:💻"
-set $ws2   "2:👷"
+set $ws2   "2:🔨"
 set $ws3   "3:🌍"
 set $ws4   "4:👑"
 set $ws5   "5:🏠"
 set $ws6   "6:💻"
-set $ws7   "7:📳"
+set $ws7   "7:💬"
 set $ws8   "8:⚡"
 set $ws9   "9:🔧"
 set $ws10 "10:🎵"
 #### COLORS ###################################################################
 set $col-fg-active      #d3dae3
-set $col-bg-active 	    #3f343f
+set $col-bg-active      #3f343f
 set $col-bg-inactive    #2f343f
 set $col-txt-active     #f3f4f5
 set $col-txt-inactive   #676E7D
@@ -167,7 +165,7 @@ bindsym Mod1+F3 exec i3-msg workspace $ws2 && thunar
 bindsym Mod1+F4 exec i3-msg workspace $ws9 && pavucontrol
 
 # Command runner
-bindsym $mod+d exec rofi -show run -font "System San Francisco Display 14"
+bindsym $mod+d exec rofi -modi drun -show drun -show-icons -font "JetBrainsMono Nerd Font 14"
 
 # Power menu
 bindsym Control+$mod+Mod1+Delete exec ~/snippets/powermenu.bash
@@ -188,9 +186,9 @@ mode "$mode_launcher" {
 # Background
 exec_always feh --bg-scale ~/.config/images/wallpaper.jpg
 # Resolution mainframe
-exec xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal \
-    --output DP-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-#exec xrandr --output Virtual1 --mode 1920x1080
+#exec xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal \
+#    --output DP-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal
+exec xrandr --output Virtual1 --mode 1680x1050
 #### BARS Mon1 #################################################################
 bar {
         font pango:FontAwesome 7
@@ -199,11 +197,10 @@ bar {
         position top
         workspace_buttons no
         status_command ~/.local/bin/bumblebee-status \
-            -m error network_traffic ping nic memory nvidiagpu sensors2 cpu load spotify kernel hostname \
+            -m error network_traffic ping nic memory sensors2 cpu load kernel hostname \
             -p sensors2.showcpu="true" \
             -p sensors2.showtemp="true" \
             -p sensors2.showfan="true" \
-            -p nvidiagpu.format="GPU: {gpu_usage_pct}% - {mem_usage_pct}% - {temp}°C" \
             -p cpu.format="CPU: {:05.02f}%" \
             -p memory.format="RAM: {percent:05.02f}%" \
             -t iceberg
@@ -217,53 +214,9 @@ bar {
         output $Mon1
         position bottom
 	    status_command ~/.local/bin/bumblebee-status \
-            -m disk:4tb disk:ssd disk:win disk:dev disk:home disk:root \
-            -m git docker_ps apt indicator weather arandr layout datetime \
+            -m disk:root \
+            -m git apt weather arandr layout datetime \
             -p root.open="thunar" -p root.path="/" -p root.format="/: ({percent:05.02f}%)" \
-            -p home.open="thunar" -p home.path="/home/odem" -p home.format="~: ({percent:05.02f}%)" \
-            -p 4tb.open="thunar" -p 4tb.path="/media/disks/4tbnvme" -p 4tb.format="4tb: ({percent:05.02f}%)" \
-            -p ssd.open="thunar" -p ssd.path="/media/disks/1tbssd" -p ssd.format="ssd: ({percent:05.02f}%)" \
-            -p dev.open="thunar" -p dev.path="/media/disks/devstore" -p dev.format="dev: ({percent:05.02f}%)" \
-            -p win.open="thunar" -p win.path="/media/disks/win" -p win.format="win: ({percent:05.02f}%)" \
-            -t iceberg
-        colors {
-            background $col-bg-inactive
-        }
-}
-#### BARS Mon2 #################################################################
-bar {
-        font pango:FontAwesome 8
-        tray_output none
-        output $Mon2
-        position top
-        workspace_buttons no
-        status_command ~/.local/bin/bumblebee-status \
-            -m error network_traffic ping nic memory nvidiagpu sensors2 cpu load spotify kernel hostname \
-            -p sensors2.showcpu="true" \
-            -p sensors2.showtemp="true" \
-            -p sensors2.showfan="true" \
-            -p nvidiagpu.format="GPU: {gpu_usage_pct}% - {mem_usage_pct}% - {temp}°C" \
-            -p cpu.format="CPU: {:05.02f}%" \
-            -p memory.format="RAM: {percent:05.02f}%" \
-            -t iceberg
-        colors {
-            background $col-bg-inactive
-        }
-}
-bar {
-        font pango:FontAwesome 10
-        tray_output none
-        output $Mon2
-        position bottom
-	    status_command ~/.local/bin/bumblebee-status \
-            -m disk:4tb disk:ssd disk:win disk:dev disk:home disk:root \
-            -m git docker_ps apt indicator weather arandr layout datetime \
-            -p root.open="thunar" -p root.path="/" -p root.format="/: ({percent:05.02f}%)" \
-            -p home.open="thunar" -p home.path="/home/odem" -p home.format="~: ({percent:05.02f}%)" \
-            -p 4tb.open="thunar" -p 4tb.path="/media/disks/4tbnvme" -p 4tb.format="4tb: ({percent:05.02f}%)" \
-            -p ssd.open="thunar" -p ssd.path="/media/disks/1tbssd" -p ssd.format="ssd: ({percent:05.02f}%)" \
-            -p dev.open="thunar" -p dev.path="/media/disks/devstore" -p dev.format="dev: ({percent:05.02f}%)" \
-            -p win.open="thunar" -p win.path="/media/disks/win" -p win.format="win: ({percent:05.02f}%)" \
             -t iceberg
         colors {
             background $col-bg-inactive
@@ -303,4 +256,5 @@ exec --no-startup-id sleep 4.5 && i3-msg workspace $ws3 ; firefox-esr
 # Other utils 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
+exec --no-startup-id pnmixer
 

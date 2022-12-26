@@ -12,19 +12,21 @@ APT_GUI_TXT_CLIENTS := evince gedit gedit-plugins
 APT_GUI_MM_CLIENTS  := vlc
 APT_DSK_X           := xorg xserver-xorg-video-nouveau xserver-xorg-video-vesa
 APT_DSK_OPENGL      := mesa-utils libglu1-mesa-dev freeglut3-dev \
-			mesa-common-dev libglew-dev libglfw3-dev \
-			libglm-dev libao-dev libmpg123-dev
+						mesa-common-dev libglew-dev libglfw3-dev \
+						libglm-dev libao-dev libmpg123-dev
 APT_DSK_BUMBLEBEE   := psutils gnome-system-monitor xcwd \
-			iw pulseaudio aptitude \
-			python3-tk progress python3-dbus
+						iw pulseaudio aptitude \
+						python3-tk progress python3-dbus
 APT_DSK_THUNAR      := thunar thunar-data thunar-archive-plugin \
-			thunar-media-tags-plugin thunar-volman \
-			xfce4-goodies xfce4-places-plugin \
-			thunar-gtkhash thunar-vcs-plugin file-roller
-APT_DSK_I3          := lightdm i3 compton rofi arc-theme
+						thunar-media-tags-plugin thunar-volman \
+						xfce4-goodies xfce4-places-plugin \
+						thunar-gtkhash thunar-vcs-plugin file-roller
+APT_DSK_I3          := lightdm i3 compton rofi feh arc-theme \
+						lxappearance pnmixer
+APT_DSK_FONTS		:= fonts-font-awesome fonts-fork-awesome
 APT_DSK_X           := xbacklight
 APT_DSK_GNOME_TOOLS := gnome-system-monitor gitsome gitsome 
-APT_PYTHON          := python3-netifaces python3-pygit2 pip    
+APT_PYTHON          := python3-netifaces python3-pygit2 python3-psutil pip    
 # --- Help --------------------------------------------------------------------
 help:
 	@echo "Usage: make TARGET"
@@ -51,7 +53,7 @@ i3-config: wallpaper
 # --- APT Installers ----------------------------------------------------------
 i3-desktop: i3-config
 	sudo apt install $(APT_DSK_I3) $(APT_DSK_X) $(APT_DSK_GNOME_TOOLS) \
-		$(APT_GUI_TERMINAL) $(APT_PYTHON) $(APT_DSK_BUMBLEBEE)
+		$(APT_GUI_TERMINAL) $(APT_PYTHON) $(APT_DSK_FONTS) $(APT_DSK_BUMBLEBEE)
 	pip install bumblebee-status
 	sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 gui-tools:
