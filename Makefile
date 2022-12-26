@@ -43,7 +43,6 @@ prepare:
 wallpaper: prepare
 	cp dotfiles/.config/mimeapps.list ~/.config/
 	cp -r dotfiles/.config/images/ ~/.config/
-	cp -r dotfiles/.config/kitty ~/.config/
 	
 i3-config: wallpaper
 	cp -r dotfiles/.config/i3/ ~/.config/
@@ -61,6 +60,10 @@ gui-tools:
 		$(APT_GUI_WEB_CLIENTS) $(APT_GUI_TXT_CLIENTS) \
 		$(APT_GUI_MM_CLIENTS) $(APT_DSK_THUNAR) -y
 	sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
+	cp dotfiles/.gtkrc-2.0 ~/.gtkrc-2.0
+	cp -r dotfiles/.config/Thunar ~/.config/
+	cp -r dotfiles/.config/xfce4 ~/.config/
+	cp -r dotfiles/.config/gtk-3.0 ~/.config/
 # --- Meta-Targets ------------------------------------------------------------
 desktop-min: i3-desktop
 desktop-full: desktop-min gui-tools
