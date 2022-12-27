@@ -203,6 +203,7 @@ bar {
         tray_output $Mon1
         output $Mon1
         position bottom
+        workspace_buttons yes
 	    status_command ~/.local/bin/bumblebee-status \
             -m disk:root disk:home \
             -m apt arandr layout datetime \
@@ -234,9 +235,10 @@ bar {
 }
 bar {
         font pango:FontAwesome 9
-        tray_output $Mon2
+        tray_output none
         output $Mon2
         position bottom
+        workspace_buttons yes
 	    status_command ~/.local/bin/bumblebee-status \
             -m disk:root disk:home \
             -m apt arandr layout datetime \
@@ -273,6 +275,7 @@ exec i3-msg workspace $ws1
 # Custom Containers
 exec --no-startup-id x-terminal-emulator
 exec --no-startup-id firefox-esr
+exec --no-startup-id i3-msg workspace $ws10 ; exec spotify
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 exec --no-startup-id pnmixer
