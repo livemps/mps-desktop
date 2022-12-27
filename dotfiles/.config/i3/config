@@ -7,7 +7,7 @@ set $term=xterm-kitty
 #set $Mon1 Virtual1
 #set $Mon2 Virtual1
 set $Mon1 DP-2
-set $Mon2 HDMI-0 
+set $Mon2 HDMI-0
 # Workspace names
 set $ws1   "1:💻"
 set $ws2   "2:🔨"
