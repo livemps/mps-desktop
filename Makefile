@@ -68,4 +68,4 @@ gui-tools:
 # --- Meta-Targets ------------------------------------------------------------
 desktop-min: i3-desktop
 desktop-full: desktop-min gui-tools
-	sudo lightdm
+	@echo "Run 'sudo lightdm' to start new x session"

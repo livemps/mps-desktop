@@ -4,8 +4,10 @@
 #### CONF VARIABLES ############################################################
 set $mod Mod4
 set $term=xterm-kitty
-set $Mon1 Virtual1
-set $Mon2 Virtual1
+#set $Mon1 Virtual1
+#set $Mon2 Virtual1
+set $Mon1 DP-2
+set $Mon2 HDMI-0 
 # Workspace names
 set $ws1   "1:💻"
 set $ws2   "2:🔨"
@@ -174,9 +176,9 @@ mode "$mode_launcher" {
 # Background
 exec_always feh --bg-scale ~/.config/images/wallpaper.jpg
 # Resolution mainframe
-#exec xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal \
-#    --output DP-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal
-exec xrandr --output Virtual1 --mode 1680x1050
+exec xrandr --output DP-2 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
+                --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate normal
+#exec xrandr --output Virtual1 --mode 1680x1050
 #### BARS Mon1 #################################################################
 bar {
         font pango:FontAwesome 7
@@ -200,6 +202,40 @@ bar {
         font pango:FontAwesome 9
         tray_output $Mon1
         output $Mon1
+        position bottom
+	    status_command ~/.local/bin/bumblebee-status \
+            -m disk:root disk:home \
+            -m apt arandr layout datetime \
+            -p home.open="i3-msg workspace $ws2 ; exec thunar" -p home.path="/home/$USER" -p home.format="~: ({percent:05.02f}%)" \
+            -p root.open="i3-msg workspace $ws2 ; exec thunar" -p root.path="/" -p root.format="/: ({percent:05.02f}%)" \
+            -t iceberg
+        colors {
+            background $col-bg-inactive
+        }
+}
+#### BARS Mon2 #################################################################
+bar {
+        font pango:FontAwesome 7
+        tray_output none
+        output $Mon2
+        position top
+        workspace_buttons no
+        status_command ~/.local/bin/bumblebee-status \
+            -m error network_traffic ping nic memory sensors2 cpu load kernel hostname \
+            -p sensors2.showcpu="true" \
+            -p sensors2.showtemp="true" \
+            -p sensors2.showfan="true" \
+            -p cpu.format="CPU: {:05.02f}%" \
+            -p memory.format="RAM: {percent:05.02f}%" \
+            -t iceberg
+        colors {
+            background $col-bg-inactive
+        }
+}
+bar {
+        font pango:FontAwesome 9
+        tray_output $Mon2
+        output $Mon2
         position bottom
 	    status_command ~/.local/bin/bumblebee-status \
             -m disk:root disk:home \
