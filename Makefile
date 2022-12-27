@@ -38,7 +38,7 @@ help:
 	@echo ""
 # --- Update ------------------------------------------------------------------
 prepare:
-	sudo apt update -y && sudo apt upgrade -y
+	sudo apt update --yes && sudo apt upgrade --yes
 	-mkdir -p ~/.config
 # --- HOME folder -------------------------------------------------------------
 wallpaper: prepare
@@ -53,13 +53,13 @@ i3-config: wallpaper
 # --- APT Installers ----------------------------------------------------------
 i3-desktop: i3-config
 	sudo apt install $(APT_DSK_I3) $(APT_DSK_X) $(APT_DSK_GNOME_TOOLS) \
-		$(APT_GUI_TERMINAL) $(APT_PYTHON) $(APT_DSK_FONTS) $(APT_DSK_BUMBLEBEE)
+		$(APT_GUI_TERMINAL) $(APT_PYTHON) $(APT_DSK_FONTS) $(APT_DSK_BUMBLEBEE) --yes
 	pip install bumblebee-status
 	sudo update-alternatives --set x-terminal-emulator /usr/bin/kitty
 gui-tools:
 	sudo apt install $(APT_GUI_ESSENTIALS) $(APT_GUI_ICONS) \
 		$(APT_GUI_WEB_CLIENTS) $(APT_GUI_TXT_CLIENTS) \
-		$(APT_GUI_MM_CLIENTS) $(APT_DSK_THUNAR) -y
+		$(APT_GUI_MM_CLIENTS) $(APT_DSK_THUNAR) --yes
 	sudo update-alternatives --set x-www-browser /usr/bin/firefox-esr
 	cp dotfiles/.gtkrc-2.0 ~/.gtkrc-2.0
 	cp -r dotfiles/.config/Thunar ~/.config/
